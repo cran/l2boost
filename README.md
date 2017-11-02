@@ -1,5 +1,12 @@
 L2boost Package
 ========================================================
+[![DOI](https://zenodo.org/badge/5745/ehrlinger/l2boost.png)](http://dx.doi.org/10.5281/zenodo.11437)
+[![CRAN version](http://www.r-pkg.org/badges/version/l2boost)](https://CRAN.R-project.org/package=l2boost)
+![cranlogs](http://cranlogs.r-pkg.org./badges/l2boost)
+
+![active](http://www.repostatus.org/badges/latest/active.svg)
+[![Build Status](https://travis-ci.org/ehrlinger/l2boost.svg?branch=master)](https://travis-ci.org/ehrlinger/l2boost)
+[![Coverage Status](https://coveralls.io/repos/ehrlinger/l2boost/badge.svg?branch=master&service=github)](https://coveralls.io/github/ehrlinger/l2boost?branch=master)
 
 The L2boost package is an efficient implementation of Freidman's boosting algorithm for linear regression using an l2-loss function and coordinate direction (design matrix columns) basis functions. The package was developed in support of Ehrlinger and Ishwaran (2012)
 
@@ -21,10 +28,10 @@ A cross-validation method (*cv.l2boost*) is also included for L2boost and elasti
 We have repackaged thediabetes data set from Efron et. al. (2004) for demonstration purposes. We also include simulation functions for reproducing the elastic net simulation (elasticNetSim) of Zou and Hastie (2005) and the example multivariate normal simulations (mvnorm.l2boost) of Ehrlinger and Ishwaran (2012).
 
 ## References
-Friedman J. (2001) Greedy function approximation: A gradient boosting machine. \emph{Ann. Statist.}, 29:1189-1232
+Friedman J. (2001) Greedy function approximation: A gradient boosting machine. (*Ann. Statist.*), 29:1189-1232
 
-Ehrlinger J., and Ishwaran H. (2012). "Characterizing l2boosting" \emph{Ann. Statist.}, 40 (2), 1074-1101
+Ehrlinger J., and Ishwaran H. (2012). "Characterizing l2boosting" (*Ann. Statist.*), 40 (2), 1074-1101
 
-Zou H. and Hastie T (2005) "Regularization and variable selection via the elastic net"  \emph{J. R. Statist. Soc. B}, 67, Part 2, pp. 301-320
+Zou H. and Hastie T (2005) "Regularization and variable selection via the elastic net" (*J. R. Statist. Soc. B*), 67, Part 2, pp. 301-320
 
-Efron B., Hastie T., Johnstone I., and Tibshirani R. (2004). "Least Angle Regression" \emph{Ann. Statist.} 32:407-499
+Efron B., Hastie T., Johnstone I., and Tibshirani R. (2004). "Least Angle Regression" (*Ann. Statist.*) 32:407-499

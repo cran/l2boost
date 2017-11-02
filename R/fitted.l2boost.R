@@ -1,6 +1,6 @@
-#' @title Extract the fitted model estimates along the solution path for an l2boost model.
+#' Extract the fitted model estimates along the solution path for an l2boost model.
 #' 
-#' @details \code{\link{fitted}} is a generic function which extracts fitted values from objects 
+#' \code{\link{fitted}} is a generic function which extracts fitted values from objects 
 #' returned by modeling functions. 
 #' 
 #' \code{\link{fitted.l2boost}} returns the function estimates obtained 
@@ -10,7 +10,7 @@
 #' iteration step m is specified.
 #' 
 #' @param object an l2boost object
-#' @param m the iteration number with the l2boost path. (defualt m=NULL)
+#' @param m the iteration number with the l2boost path. (default m=NULL)
 #' @param ... other arguments
 #'
 #' @return The vector of fitted response estimates at the given iteration m. By default,
@@ -54,18 +54,16 @@
 #'   type="l", lty=2, col="red", lwd=2)
 #' abline(h=0, lty=2, col = 'gray')
 #' 
-#' @method fitted l2boost
-#' @S3method fitted l2boost
-#' 
+#' @export
 fitted.l2boost <- function(object, m=NULL, ...){
   if(inherits(object, "cv")){
     if(is.null(m)){
-      rs<-predict(object$fit)$yhat.path[[object$opt.step]]
+      rs<-predict.l2boost(object$fit)$yhat.path[[object$opt.step]]
     }else if(m > length(object$fit$l.crit)){
       m = length(object$fit$l.crit)
-      rs<-predict(object$fit)$yhat.path[[m]]
+      rs<-predict.l2boost(object$fit)$yhat.path[[m]]
     }else{
-      rs<-predict(object$fit)$yhat.path[[m]]
+      rs<-predict.l2boost(object$fit)$yhat.path[[m]]
     }
   }else{
     rnms <- if(is.null(rownames(object$x))){1:dim(object$x)[1]}else{rownames(object$x)}

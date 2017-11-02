@@ -7,19 +7,15 @@
 # y is centered --- > mean is returned as part of the object
 # !!! remove x-columns with NA's !!! CAUTION
 #---------------------------------------------------------------------
-#' @export l2boost
-#' @name l2boost
-#' 
-l2boost <- function(x, ...)UseMethod("l2boost")
 #
-#' @title Generic gradient descent boosting method for linear regression.
+#' Generic gradient descent boosting method for linear regression.
 #' 
-#' @description Efficient implementation of Friedman's boosting algorithm  [Friedman (2001)] with L2-loss function and coordinate
+#' Efficient implementation of Friedman's boosting algorithm  [Friedman (2001)] with L2-loss function and coordinate
 #'  direction (design matrix columns) basis functions. This includes the elasticNet data augmentation of Ehrlinger and Ishwaran (2012), 
 #'  which adds an L2-penalization (lambda) similar to the elastic net [Zou and Hastie (2005)].
 #' 
-#' @details
-#'  The \code{\link{l2boost}} function is an efficient implementation of a generic boosting method [Friedman (2001)] for
+#' 
+#' The \code{\link{l2boost}} function is an efficient implementation of a generic boosting method [Friedman (2001)] for
 #' linear regression using an L2-loss function. The basis functions are the column vectors of the design matrix. 
 #' \code{\link{l2boost}} scales the design matrix such that the coordinate columns of the design correspond to the
 #' gradient directions for each covariate. The boosting coefficients are equivalent to the gradient-correlation of each 
@@ -32,7 +28,7 @@ l2boost <- function(x, ...)UseMethod("l2boost")
 #'    \emph{nu}.
 #' \item \emph{lars} - The l2boost-lars-limit (See Efron et.al (2004)). This algorithm takes a single step of the 
 #'   optimal length to the critical point required for a new coordinate direction to become favorable. Although optimal
-#'   in the number of steps required to reach the OLS solution, this method may be computationaly expensive for large p
+#'   in the number of steps required to reach the OLS solution, this method may be computationally expensive for large p
 #'   problems, as the method requires a matrix inversion to calculate the step length. 
 #' \item \emph{discrete} - Optimized Friedman algorithm to reduce number of evaluations required 
 #'   [Ehrlinger and Ishwaran 2012]. The algorithm dynamically determines the number of steps of length \emph{nu} to take along
@@ -43,7 +39,7 @@ l2boost <- function(x, ...)UseMethod("l2boost")
 #'   directions (by the L2 measure).
 #' }
 #' 
-#' \code{\link{l2boost}} keeps track of all gradient-coorelation coefficients (\emph{rho}) at each iteration in addition to the maximal
+#' \code{\link{l2boost}} keeps track of all gradient-correlation coefficients (\emph{rho}) at each iteration in addition to the maximal
 #' descent direction taken by the method. Visuallizing these coefficients can be informative of the inner workings of gradient boosting 
 #' (see the examples in the \code{\link{plot.l2boost}} method).
 #' 
@@ -62,11 +58,11 @@ l2boost <- function(x, ...)UseMethod("l2boost")
 #' the training dataset) along the solution path. 
 #' \item \code{\link{residuals}} (\code{\link{residuals.l2boost}}) returns the training set \code{\link{l2boost}} residuals along the
 #' solution path.
-#' \item \code{\link{plot}} (\code{\link{plot.l2boost}}) for graphing model cofficients of an \code{\link{l2boost}} object.
+#' \item \code{\link{plot}} (\code{\link{plot.l2boost}}) for graphing model coefficients of an \code{\link{l2boost}} object.
 #' \item \code{\link{predict}} (\code{\link{predict.l2boost}}) for generating \code{\link{l2boost}} prediction estimates on possibly 
 #' new test set observations.
 #' }
-#' A cross-validation method (\code{\link{cv.l2boost}}) is also included for L2boost and elasticBoost, for cross-validated error estimats 
+#' A cross-validation method (\code{\link{cv.l2boost}}) is also included for L2boost and elasticBoost, for cross-validated error estimates 
 #' and regularization parameter optimizations.
 #'
 #' @references Friedman J. (2001) Greedy function approximation: A gradient boosting machine. \emph{Ann. Statist.}, 29:1189-1232
@@ -74,7 +70,6 @@ l2boost <- function(x, ...)UseMethod("l2boost")
 #' @references Zou H. and Hastie T (2005) "Regularization and variable selection via the elastic net"  \emph{J. R. Statist. Soc. B}, 67, Part 2, pp. 301-320
 #' @references Efron B., Hastie T., Johnstone I., and Tibshirani R. (2004). "Least Angle Regression" \emph{Ann. Statist.} 32:407-499
 #'
-#' @usage \method{l2boost}{default}(x, y, M, nu, lambda, trace, type, qr.tolerance, eps.tolerance, ...)
 #'
 #' @param x design matrix of dimension n x p
 #' @param y response variable of length n
@@ -182,10 +177,18 @@ l2boost <- function(x, ...)UseMethod("l2boost")
 #'   main="elasticBoost nu=1.e-3, lambda=.1")
 #' }
 #' 
-#' @rdname l2boost
+#' @aliases l2boost l2boost.default l2boost.formula
+#' 
+#' 
+#' 
+#' @importFrom stats model.frame model.matrix model.response
+#' @export
+l2boost <- function(x, ...)UseMethod("l2boost")
+
+#' @usage \method{l2boost}{default}(x, y, M, nu, lambda, trace, type , qr.tolerance, eps.tolerance, ...)
 #' @name l2boost
-#' @method l2boost default
-#' @S3method l2boost default
+#' @rdname l2boost
+#' @export 
 l2boost.default <- function(x, y,
                             M = NULL, nu = 1e-4, lambda = NULL, trace = FALSE, 
                             type = c("discrete", "hybrid", "friedman","lars"),
@@ -472,8 +475,7 @@ l2boost.default <- function(x, y,
 #' 
 #' @aliases l2boost.formula l2boost.default
 #' 
-#' @method l2boost formula
-#' @S3method l2boost formula
+#' @export
 l2boost.formula <- function(formula, data, ...){  
     mf <- model.frame(formula=formula, data=data)
     x<- model.matrix(attr(mf, "terms"), data=mf)

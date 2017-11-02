@@ -10,7 +10,7 @@
 #' By default, \code{\link{predict.l2boost}} returns the function estimates, unless type="coef" then the 
 #' set of regression coefficients (beta) are returned from the \code{\link{l2boost}} object.
 #'
-#' @param object an l2boost objectect
+#' @param object an l2boost object
 #' @param xnew a new design matrix to fit with the l2boost object
 #' @param newdata a new design matrix to fit with the l2boost object
 #' @param type "fit" or "coef" determins the values returned. "fit" returns model estimates, "coef" returns the 
@@ -60,8 +60,7 @@
 #' # Or used to predict new data, in this case a subset of training data
 #' cbind(diabetes$y[1:5], predict(object, xnew=diabetes$x[1:5,])$yhat)
 #' 
-#' @method predict l2boost
-#' @S3method predict l2boost
+#' @export
 predict.l2boost <- function(object, xnew = NULL, type = c("fit", "coef"), newdata=xnew, ...) {
   if(inherits(object,"cv")) object <- object$fit
   

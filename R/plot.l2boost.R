@@ -108,9 +108,10 @@
 #' # red points are selected in boosting algorithm.
 #' plot(coef(cv.l2$fit, m=cv.l2$opt.step), col=clr, ylab=expression(beta))
 #' }
-#' @method plot l2boost
-#' @S3method plot l2boost
 #' 
+#' @importFrom stats quantile 
+#' @importFrom graphics plot matplot lines 
+#' @export 
 plot.l2boost <- function(x, 
                          type = c("rho", "coef"),
                          standardize = TRUE, active.set=NULL,
